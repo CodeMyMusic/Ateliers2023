@@ -1,22 +1,25 @@
 # Pour la génération de nombres aléatoires
 import random
 
-# Réponses ouvertes possibles
-possible_open_resonses = ['o','n']
+# Réponses au jeu
+game_responses = ['papier', 'pierre', 'ciseaux']
 
-# Toutes les réponses
-all_game_resonses = ['papier', 'caillou', 'ciseaux', 'puit']
 
-# Réponses classiques
-classic_game_responses = ['papier', 'caillou', 'ciseaux']
+define_winner = {
+    "papier": "pierre",
+    "ciseaux": "papier",
+    "pierre": "ciseaux"
+}
 
 # Question
-cpo = input("Voulez-vous jouer contre l'ordinateur (Max 5 parties) O/N ? ").lower()
+cpo = input(
+    "Voulez-vous jouer contre l'ordinateur (Max 5 parties) O/N ? ").lower()
 
 # Tant que la réponse n'est pas comprise
-while cpo not in possible_open_resonses:
+while cpo != 'o' and cpo != 'n':
     print("Je n'ai pas compris votre réponse")
-    cpo = input("Voulez-vous jouer contre l'ordinateur (Max 5 parties) O/N ? ").lower()
+    cpo = input(
+        "Voulez-vous jouer contre l'ordinateur (Max 5 parties) O/N ? ").lower()
 
 # Si le joueur veut jouer contre l'ordinateur
 if cpo == 'o':
@@ -27,28 +30,47 @@ if cpo == 'o':
 # Si le joueur veut jouer contre un autre joueur
 else:
     joueur1 = input("Quel est votre nom ? ")
-    print("Bienvenu ", joueur1, " nous allons jouer ensemble")
+    print("Bienvenue ", joueur1, " nous allons jouer ensemble")
     joueur2 = input("Quel est le nom du deuxième joueur ?")
-    print("Bienvenu ", joueur2, " nous allons jouer ensemble \n")
+    print("Bienvenue ", joueur2, " nous allons jouer ensemble \n")
 
-c = True
-p2 = 0
-s1 = 0
-np = 0
+puit_is_allowed = input("Voulez-vous autoriser le puit ? (O/N) ").lower()
+
+# Tant que la réponse n'est pas comprise
+while puit_is_allowed != 'o' and puit_is_allowed != 'n':
+    print("Je n'ai pas compris votre réponse")
+    puit_is_allowed = input("Voulez-vous autoriser le puit ? (O/N) ").lower()
+
+if puit_is_allowed == 'o':
+    game_responses.append("puit")
+
+# Pour l'affichage des choix
+choix = "("
+for i in game_responses:
+    choix = choix + i + ","
+choix += ")"
+
+exit_game = False
+joueur1_score = 0
+joueur2_score = 0
+nbr_parties = 0
+
 
 def get_game_answer(joueur):
     response = input(
-        "{nom} faîtes votre choix parmi (pierre, papier, ciseaux): ".format(nom=joueur)
-        ).lower()
-    while response not in classic_game_responses:
-        print("Joueur ", joueur)
-        response = input("Faîtes votre choix parmi (pierre, papier, ciseaux): "
-            ).lower()
-                
+        "{nom} faîtes votre choix parmi {choix}: ".format(
+            nom=joueur, choix=choix)
+    ).lower()
+    while response not in game_responses:
+        print("Je n'ai pas compris votre réponse")
+        response = input("Faîtes votre choix parmi", choix, ": "
+                         ).lower()
+
     return response
 
-while c == True:
-    np += 1
+
+while exit_game == False:
+    nbr_parties += 1
     joueur1_answer = get_game_answer(joueur1)
 
     # Si le joueur 2 est un ordinateur
@@ -59,100 +81,52 @@ while c == True:
         joueur2_answer = get_game_answer(joueur2)
 
     # On affiche les choix de chacun
-    print("Si on récapitule :", joueur1, joueur1_answer, "et", joueur2, joueur2_answer, "\n")
+    print("On récapitule :", joueur1, "a choisi", joueur1_answer,
+          "et", joueur2, "a choisi", joueur2_answer, "\n")
 
-    # On regarde qui a gagné cette manche on calcule les points et on affiche le résultat
-    if c1 == 'papier' and e2 == 'papier':
-        w12 = "aucun de vous, vous être ex æquo"
-        s1 = s1 + 0
-        p2 = p2 + 0
-        print("le gagnant est", w12)
-        print("Les scores à l'issue de cette manche sont donc",
-              joueur1, s1, "et", joueur2, p2, "\n")
+    # Dans le dictionnaire "define_winner", on regarde quelle clé est associée à la réponse du joueur
+    # la réponse du joueur appartient à la liste de valeurs du dico
+    joueur1_perd_contre = list(define_winner.keys())[list(
+        define_winner.values()).index(joueur1_answer)]
 
-    if c1 == 'pierre' and e2 == 'papier':
-        w12 = joueur2
-        s1 = s1 + 0
-        p2 = p2 + 1
-        print("le gagnant est", w12)
-        print("Les scores à l'issue de cette manche sont donc",
-              joueur1, s1, "et", joueur2, p2, "\n")
+    # Dans le dictionnaire "define_winner", on regarde quelle valeur est associée à la réponse du joueur
+    # la réponse du joueur appartient à la liste de clés du dico
+    joueur1_gagne_contre = define_winner[joueur1_answer]
 
-    if c1 == 'pierre' and e2 == 'pierre':
-        w12 = "aucun de vous, vous être ex æquo"
-        s1 = s1 + 0
-        p2 = p2 + 0
-        print("le gagnant est", w12)
-        print("Les scores à l'issue de cette manche sont donc",
-              joueur1, s1, "et", joueur2, p2, "\n")
+    # Si le joueur1 perd contre le choix du joueur2
+    if joueur1_perd_contre == joueur2_answer:
+        joueur2_score += 1
+        print("le gagnant est", joueur2)
+    # Si le joueur2 gagne contre le choix du joueur2
+    elif joueur1_gagne_contre == joueur2_answer:
+        joueur1_score += 1
+        print("le gagnant est", joueur1)
+    # Sinon cela veut dire que les joueurs sont ex_aequo
+    else:
+        print("Les deux joueurs sont ex_aequo")
 
-    if c1 == 'pierre' and e2 == 'ciseaux':
-        w12 = joueur1
-        s1 = s1 + 1
-        p2 = p2 + 0
-        print("le gagnant est", w12)
-        print("Les scores à l'issue de cette manche sont donc",
-              joueur1, s1, "et", joueur2, p2, "\n")
+    print("Les scores à l'issue de cette manche sont donc",
+          joueur1, joueur1_score, "et", joueur2, joueur2_score, "\n")
 
-    if c1 == 'papier' and e2 == 'ciseaux':
-        w12 = joueur2
-        s1 = s1 + 0
-        p2 = p2 + 1
-        print("le gagnant est", w12)
-        print("Les scores à l'issue de cette manche sont donc",
-              joueur1, s1, "et", joueur2, p2, "\n")
+    if nbr_parties < 5:
+        exit_game = False
+    else:
+        exit_game = True
 
-    if c1 == 'papier' and e2 == 'pierre':
-        w12 = joueur1
-        s1 = s1 + 1
-        p2 = p2 + 0
-        print("le gagnant est", w12)
-        print("Les scores à l'issue de cette manche sont donc",
-              joueur1, s1, "et", joueur2, p2, "\n")
-
-    if c1 == 'ciseaux' and e2 == 'pierre':
-        w12 = joueur2
-        s1 = s1 + 0
-        p2 = p2 + 1
-        print("le gagnant est", w12)
-        print("Les scores à l'issue de cette manche sont donc",
-              joueur1, s1, "et", joueur2, p2, "\n")
-
-    if c1 == 'ciseaux' and e2 == 'ciseaux':
-        w12 = "aucun de vous, vous être ex æquo"
-        s1 = s1 + 0
-        p2 = p2 + 0
-        print("le gagnant est", w12)
-        print("Les scores à l'issue de cette manche sont donc",
-              joueur1, s1, "et", joueur2, p2, "\n")
-
-    if c1 == 'ciseaux' and e2 == 'papier':
-        w12 = joueur1
-        s1 = s1 + 1
-        p2 = p2 + 0
-        print("le gagnant est", w12)
-        print("Les scores à l'issue de cette manche sont donc",
-              joueur1, s1, "et", joueur2, p2, "\n")
-
-    if np == 1 or np == 2 or np == 3 or np == 4:
-        c = True
-    if np == 5:
-        c = False
-
-    if np == 1 or np == 2 or np == 3 or np == 4:
-        # On propose de c ou de s'arrêter
+    if np < 5:
+        # On propose de exit_gameou de s'arrêter
         go = input(
             "Souhaitez vous refaire une partie {} contre {} ? (O/N) ".format(joueur1, joueur2))
         # Tant que la réponse n'est pas comprise
-        if go not in possible_open_resonses:
-            c = True
+        if go != 'o' and go != 'n':
+            exit_game = True
             print("Vous ne répondez pas à la question, on continue")
-            go = input("Voulez-vous jouer contre l'ordinateur (Max 5 parties) O/N ? ").lower()
+            go = input(
+                "Voulez-vous jouer contre l'ordinateur (Max 5 parties) O/N ? ").lower()
         if go == 'o':
-            c = True
+            exit_game = False
         else:
-            c = False
+            exit_game = True
 
 
-if c == False:
-    print("Merci d'avoir joué ! A bientôt")
+print("Merci d'avoir joué ! A bientôt")
