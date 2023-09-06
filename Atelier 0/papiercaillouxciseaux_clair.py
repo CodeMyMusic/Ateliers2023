@@ -6,9 +6,10 @@ game_responses = ['papier', 'pierre', 'ciseaux']
 
 
 define_winner = {
-    "papier": "pierre",
+    "papier": ["pierre", "puit"],
     "ciseaux": "papier",
-    "pierre": "ciseaux"
+    "pierre": "ciseaux",
+    "puit": ["pierre", "ciseaux"],
 }
 
 # Question
@@ -108,16 +109,17 @@ while exit_game == False:
     print("Les scores à l'issue de cette manche sont donc",
           joueur1, joueur1_score, "et", joueur2, joueur2_score, "\n")
 
+
     if nbr_parties < 5:
         exit_game = False
     else:
         exit_game = True
 
-    if np < 5:
-        # On propose de exit_gameou de s'arrêter
+    if nbr_parties< 5:
+        # On propose au joueur(s) de rejouer
         go = input(
             "Souhaitez vous refaire une partie {} contre {} ? (O/N) ".format(joueur1, joueur2))
-        # Tant que la réponse n'est pas comprise
+        # Si la réponse est non valide
         if go != 'o' and go != 'n':
             exit_game = True
             print("Vous ne répondez pas à la question, on continue")
