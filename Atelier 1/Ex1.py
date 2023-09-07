@@ -1,3 +1,20 @@
+#/// CONSTANTES ///#
+
+# tranches ou bornes imc associées aux descriptions
+INTERPRETATION_IMC_DIC = {
+    # une valeur = une borne
+    "Dénutrition ou famine": 16.5,
+    # deux valeurs = une tranche
+    "Maigreur":[16.5, 18.5],
+    "Corpulence normale": [18.5, 25],
+    "Surpoids": [25, 30],
+    "Obsésité modérée": [30, 35],
+    "Obsésité sévère": [35, 40],
+    "Obésité morbide": 40
+}
+
+#////////////#
+
 def main():
     saisieValide = False
     while saisieValide == False:
@@ -16,19 +33,6 @@ def main():
     print("Catégorie : ", description)
     # pour que l'on puisse essayer aussi longtemps qu'on le souhaite
     main()
-
-# tranches ou bornes imc associées aux descriptions
-INTERPRETATION_IMC_DIC = {
-    # une valeur = une borne
-    "Dénutrition ou famine": 16.5,
-    # deux valeurs = une tranche
-    "Maigreur":[16.5, 18.5],
-    "Corpulence normale": [18.5, 25],
-    "Surpoids": [25, 30],
-    "Obsésité modérée": [30, 35],
-    "Obsésité sévère": [35, 40],
-    "Obésité morbide": 40
-}
 
 def interpretation_imc(imc : int) -> str:
     """Renvoie une description selon l'imc entré

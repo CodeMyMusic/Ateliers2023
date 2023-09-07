@@ -57,7 +57,5 @@ def est_bissextile(annee : int) -> bool:
     
     return valid
 
-
-
 if __name__ == "__main__":
     main()
