@@ -44,8 +44,10 @@ def interpretation_imc(imc : int) -> str:
     # on met sous forme de liste les tranches/bornes imc
     tranche_imc = list(INTERPRETATION_IMC_DIC.values())
     # tout ce qui est en dessous de cette borne est la 1ere catégorie
+    # le seuil min est le premier elmt du dico INTERPRETATION_IMC_DIC
     seuil_min = tranche_imc[0]
     # tout ce qui est au dessus de cette borne est la derniere catégorie
+    # le seuil max est le dernier elmt du dico INTERPRETATION_IMC_DIC
     seuil_max = tranche_imc[len(INTERPRETATION_IMC_DIC)-1]
 
     # on met sous forme de liste les descriptions des catégories
