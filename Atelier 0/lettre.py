@@ -6,7 +6,7 @@ LETTRE_VERTE = {
     250: 4,
     500: 6,
     1000: 7.5,
-    3000: 10.50,
+    3000: 10.5,
 }
 
 LETTRE_PRIORITAIRE = {
@@ -25,48 +25,52 @@ ECOPLI = {
 
 #// // // // // #
 
+# Types de lettres possibles
+possible_types = {
+    "lv": LETTRE_VERTE,
+    "lp": LETTRE_PRIORITAIRE,
+    "eco": ECOPLI
+}
+
+types_input = list(possible_types.keys())
+
 def main():
     print("\n-- ENVOI DE LETTRE --\n")
 
     #// DEBUT SAISIE //#
-
-    # ajouter options
-    # ne pas embeter
-    # rajouter une limite
-
+    
+    # INPUT TYPE
     saisieValide = False
     while saisieValide == False:
-        poids = input("Entrez le poids de la lettre : ")
+        type_lettre = input("Entrez le type de la lettre {} :".format(types_input))
+        if type_lettre in types_input:
+            saisieValide = True
+        else:
+            print("Type de lettre non reconnu. Vérifiez que vous n'avez pas fait de faute de frappe.")
+
+    # INPUT POIDS
+    saisieValide = False
+    while saisieValide == False:
+        liste_poids = list(possible_types[type_lettre].keys())
+        poids = input("Entrez le poids de la lettre (max {} grammes) : ".format(liste_poids[len(liste_poids)-1]))
         try:
             poids = int(poids)
         except:
             print("Le poids doit être de type nombre entier")
         else:
-            saisieValide = True
-
-    saisieValide = False
-    while saisieValide == False:
-        type_lettre = input("Entrez le type de la lettre :").upper()
-        if type_lettre in possible_types:
-            saisieValide = True
-        else:
-            print("Type de lettre non reconnu. Vérifiez que vous n'avez pas fait de faute de frappe.")
+            if (poids <= liste_poids[len(liste_poids)-1]):
+                saisieValide = True
+            else:
+                print("Vous avez dépassé le poids maximum autorisé")
 
     #// FIN SAISIE //#
             
     prix = trouver_montant_lettre(poids, type_lettre)
 
-    print("Pour une lettre de type {} dont le poids est de {}grammes, le prix est de {}€".format(type_lettre, poids, prix))
+    print("Pour une lettre de type {} dont le poids est de {} grammes, le prix est de {} €".format(type_lettre, poids, prix))
 
 
-# Types de lettres possibles
-possible_types = {
-    "LETTRE VERTE": LETTRE_VERTE,
-    "LETTRE PRIORITAIRE": LETTRE_PRIORITAIRE,
-    "ECOPLI": ECOPLI
-}
-
-def trouver_montant_lettre(poids: int, dico_type_lettre: str) -> int:
+def trouver_montant_lettre(poids: int, type_lettre: str) -> int:
     """Trouver le montant de la lettre en fonction du poids et du type
 
     Args:
@@ -77,17 +81,18 @@ def trouver_montant_lettre(poids: int, dico_type_lettre: str) -> int:
         int: le montant de la lettre
     """
 
-    # récupère le dico associé au type
-    dico_type_lettre = possible_types[type_lettre]
+    # récupère  type
+    dico_poids_prix = possible_types[type_lettre]
     prix = "Prix inconnu"
     trouvePrix = False
     # index dans le dico
     i = 0
-    while trouvePrix == False and i < len(dico_type_lettre):
+    # tant qu'on a pas trouvé le prix et qu'on a pas dépassé la longeur du dico
+    while trouvePrix == False and i < len(dico_poids_prix):
         # la clé c'est le poids
-        tranche_poids = list(dico_type_lettre.keys())[i]
+        tranche_poids = list(dico_poids_prix.keys())[i]
         if poids <= tranche_poids:
-            tranche_prix = dico_type_lettre[tranche_poids]
+            tranche_prix = dico_poids_prix[tranche_poids]
             prix = tranche_prix
             trouvePrix = True
         else:
