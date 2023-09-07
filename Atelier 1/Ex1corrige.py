@@ -2,17 +2,17 @@ import math
 
 #/// CONSTANTES ///#
 
-# tranches ou bornes imc associées aux descriptions
+# interpretation de l'imc en plsusieurs tranches
 INTERPRETATION_IMC_DIC = {
-    # une valeur = une borne
-    "Dénutrition ou famine": [0, 16.5],
-    # deux valeurs = une tranche
-    "Maigreur":[16.5, 18.5],
-    "Corpulence normale": [18.5, 25],
-    "Surpoids": [25, 30],
-    "Obsésité modérée": [30, 35],
-    "Obsésité sévère": [35, 40],
-    "Obésité morbide": [40, math.inf]
+    #tranche de valeurs
+
+    (0, 16.5) : "Dénutrition ou famine",
+    (16.5, 18.5) : "Maigreur",
+    (18.5, 25) : "Corpulence normale",
+    (25, 30) : "Surpoids",
+    (30, 35) : "Obsésité modérée",
+    (35, 40) : "Obsésité sévère",
+    (40, math.inf) : "Obésité morbide"
 }
 
 #////////////#
@@ -45,22 +45,21 @@ def interpretation_imc(imc : float) -> str:
     Returns:
         str: l'interpretation de l'imc
     """
-    tranche_imc = list(INTERPRETATION_IMC_DIC.values())
+    tranche_imc = list(INTERPRETATION_IMC_DIC.keys())
     trouveDescription = False
     # compteur de boucle
     i = 0
     # tant qu'on a pas trouve la description et qu'on a pas dépassé
     # la taille de la liste
-    while trouveDescription == False and i < len(tranche_imc):
+    while not trouveDescription and i < len(tranche_imc):
         # la première valeur dans la liste [16.5, 18.5] est le seuil min
         seuil_min = tranche_imc[i][0]
         # la seconde valeur dans la liste [16.5, 18.5] est le seuil max
         seuil_max = tranche_imc[i][1]
         # si l'imc est compris dans ces bornes
         if seuil_min <= imc <= seuil_max:
-            # la description correspond au même index pour la liste des
-            # tranches imc
-            description = list(INTERPRETATION_IMC_DIC.keys())[i]
+            # on récupère la description
+            description = INTERPRETATION_IMC_DIC[tranche_imc[i]]
             trouveDescription = True
         else:
             i+=1
