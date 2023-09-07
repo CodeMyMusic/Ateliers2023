@@ -5,34 +5,34 @@ def main():
         try:
             # on essaie de convertir l'input en nombre réel
             annee = int(annee)
-        except:
+        except ValueError:
             # l'input n'est pas un nombre réel
             print("L'annee doit être un nombre entier")
         else:
             saisieValide = True
 
     # pour afficher le résultat
-    afficher(annee, est_bissextile(annee))
+    afficher_res(annee)
 
     # tests pertinents
     print("\n###### TESTS #######")
     tester()
 
-def afficher(annee: int, bissextile: bool):
+def afficher_res(annee: int):
     """Affiche si une année est bissextile ou non
 
     Args:
         annee (int): l'année
         bissextile (bool): si l'année est bissextile ou non
     """
-    if bissextile:
+    if est_bissextile(annee):
         print(annee, "est une année bissextile")
     else:
         print(annee, "n'est pas une année bissextile")
 
 def tester():
     for annee in range(RANGE_TEST[0], RANGE_TEST[1]):
-        afficher(annee, est_bissextile(annee))
+        afficher_res(annee)
 
 # années à tester (tranche)
 RANGE_TEST = [2000, 2025]
@@ -51,9 +51,11 @@ def est_bissextile(annee : int) -> bool:
     valid = False 
     # si l'annee est divisible par 4
     if annee % 4 == 0:
-        # si l'annee n'est ni divisible par ni divisible par 400
-        if annee % 100 != 0 and annee % 400 != 0:
-            valid = True
+        # si l'annee n'est pas divisible par 100
+        if annee % 100 != 0:
+            # si l'annee est divisible par 400
+            if annee % 400 == 0:
+                valid = True
     
     return valid
 
