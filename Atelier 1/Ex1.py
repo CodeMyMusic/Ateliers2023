@@ -1,3 +1,7 @@
+# !!!!!!!!
+# !!!!!!!! CE QU'IL NE FAUT PAS FAIRE EST DANS CETTE VERSION DE L'EXO !!!!!!!!!!!!
+# !!!!!!!!
+
 #/// CONSTANTES ///#
 
 # tranches ou bornes imc associées aux descriptions
