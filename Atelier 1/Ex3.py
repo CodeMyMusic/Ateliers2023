@@ -136,5 +136,6 @@ def equation(a: float, b:float, c:float) -> str:
     return solution
 
 
+#--- EXECUTION ---# 
 if __name__ == "__main__":
     main()

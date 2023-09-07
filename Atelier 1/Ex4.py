@@ -1,13 +1,15 @@
+# pour la manipulation de date
+from datetime import date
+
+# import de la fonction "est_bissextile" pour
+# reconnaître les années bissextiles
 from Ex2 import est_bissextile
 
 def main():
-    jour = saisie_entier("jour")
-    mois = saisie_entier("mois")
-    annee = saisie_entier("année")
-    print(date_est_valide(jour, mois, annee))
+    test_acces()
     main()
 
-def saisie_entier(type_date : str) -> int:
+def saisir_entier(chose : str) -> int:
     """Vérifie que la saisie est un entier
 
     Args:
@@ -18,7 +20,8 @@ def saisie_entier(type_date : str) -> int:
     """
     saisieValide = False
     while saisieValide == False:
-        entier = input(f'Entrez le {type_date}:')
+        # saisie
+        entier = input(f'Entrez {chose} : ')
         try:
             # on essaie de convertir l'input en nombre réel
             entier = int(entier)
@@ -66,6 +69,33 @@ def date_est_valide(jour : int, mois: int, annee: int) -> bool:
 
     return est_valide
 
+def saisir_date_naissance() -> date:
+    """Demande la date de naissance à l'utilisateur
+
+    Returns:
+        date: la date de naissance (jour, mois, année)
+    """
+    #// DEBUT SAISIE
+    jour = saisir_entier("le jour")
+    mois = saisir_entier("le mois")
+    annee = saisir_entier("l'année")
+    #// FIN SAISIE
+
+    return date(annee, mois, jour)
+
+def age(date_naissance : date) -> int:
+    print(date.today().day - date_naissance.day) 
+
+def test_acces():
+    """Assure la saisie de la date de naissance et 
+    determine en fonction de l'age si l'acces est autorisé
+
+    """
+    # saisir la date de naissance
+    date_naissance = saisir_date_naissance()
+    age(date_naissance)
+
+#--- EXECUTION ---# 
 if __name__ == "__main__":
     main()
 
