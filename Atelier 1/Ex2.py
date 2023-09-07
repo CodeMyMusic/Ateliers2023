@@ -51,11 +51,15 @@ def est_bissextile(annee : int) -> bool:
     valid = False 
     # si l'annee est divisible par 4
     if annee % 4 == 0:
-        # si l'annee n'est pas divisible par 100
-        if annee % 100 != 0:
+        # si l'annee est divisible par 100
+        if annee % 100 == 0:
             # si l'annee est divisible par 400
             if annee % 400 == 0:
                 valid = True
+        # sinon...
+        else:
+            # ...l'annee est bissextile
+            valid = True
     
     return valid
 
