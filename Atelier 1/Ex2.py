@@ -15,15 +15,22 @@ def main():
     afficher(annee, est_bissextile(annee))
 
     # tests pertinents
-    tests()
+    print("\n###### TESTS #######")
+    tester()
 
 def afficher(annee: int, bissextile: bool):
+    """Affiche si une année est bissextile ou non
+
+    Args:
+        annee (int): l'année
+        bissextile (bool): si l'année est bissextile ou non
+    """
     if bissextile:
         print(annee, "est une année bissextile")
     else:
         print(annee, "n'est pas une année bissextile")
 
-def tests():
+def tester():
     for annee in range(RANGE_TEST[0], RANGE_TEST[1]):
         afficher(annee, est_bissextile(annee))
 
@@ -33,6 +40,14 @@ RANGE_TEST = [2000, 2025]
 ANNEES_BISSEXTILES = [2004, 2008, 2012, 2016, 2020, 2024]
 
 def est_bissextile(annee : int) -> bool: 
+    """Détermine si une année est bissextile ou non
+
+    Args:
+        annee (int): l'année
+
+    Returns:
+        bool: l'année est valide ou non
+    """
     valid = False 
     # si l'annee est divisible par 4
     if annee % 4 == 0:
