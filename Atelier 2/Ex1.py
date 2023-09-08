@@ -71,8 +71,8 @@ def tester():
     print("Test liste d'entiers (boucle while) : ", 
     somme_boucle_while(liste))
 
-def main():
-    tester()
+    print(val_max([1, 503, 501, 70, 3, 1]))
+    print(ind_max([1, 503, 501, 70, 3, 1]))
 
 def moyenne(lst : list) -> float:
     """Retourne la moyenne des valeurs d'une liste
@@ -91,30 +91,93 @@ def moyenne(lst : list) -> float:
         moy = 0
     return moy
 
-def nb_sup_for_elmt(lst : list, elmt : int) -> list:
-    """Renvoie le 
+def nb_sup_for_elmt(lst : list, e : int) -> int:
+    """Renvoie le nombre de valeurs dans la liste supérieures à un entier e
+    en utilisant une boucle for basée sur les éléments
 
     Args:
-        lst (list): _description_
-        elmt (int): _description_
+        lst (list): la liste d'entiers
+        elmt (int): l'entier
 
     Returns:
-        list: _description_
+        int: le nombre d'éléments
     """
-    lst_values_inferior_than_elmt = []
+    nbr_sup_elmt = 0
     for value in lst:
-        if value > elmt:
-            lst_values_inferior_than_elmt.append(value)
+        if value > e:
+            nbr_sup_elmt += 1
 
-    return lst_values_inferior_than_elmt
+    return nbr_sup_elmt
 
-def nb_sup_for_index(lst : list, elmt : int) -> list:
-    lst_values_inferior_than_elmt = []
+def nb_sup_for_index(lst : list, e : int) -> int:
+    """Renvoie le nombre de valeurs dans la liste supérieures à un entier e
+    en utilisant une boucle for basée sur les indices
+
+    Args:
+        lst (list): la liste d'entiers
+        elmt (int): l'entier
+
+    Returns:
+        int: le nombre d'éléments
+    """
+    nbr_sup_elmt = 0
     for i in range(len(lst)):
-        if lst[i] > elmt:
-            lst_values_inferior_than_elmt.append(lst[i])
+        if lst[i] > e:
+            nbr_sup_elmt += 1
 
-    return lst_values_inferior_than_elmt
+    return nbr_sup_elmt
+
+def moy_sup(lst : list, e : int) -> float:
+    """Retourne la moyenne des valeurs d'une liste strictement
+    supérieures à e
+
+    Args:
+        lst (list): la liste d'entiers
+        e (int): l'entier
+
+    Returns:
+        float: la moyenne
+    """
+    nb_sup_lst = []
+    for value in lst:
+        if value > e:
+            nb_sup_lst.append(value)
+    
+    return moyenne(nb_sup_lst)
+
+def val_max(lst : list) -> int:
+    """Retourne la valeur maximale d'une liste
+
+    Args:
+        lst (list): la liste
+
+    Returns:
+        int: la valeur max
+    """
+    max_val = lst[0]
+    for i in range(1, len(lst)):
+        if lst[i] > max_val:
+            max_val = lst[i]
+    return max_val
+
+def ind_max(lst : list) -> int:
+    """Retourne l'indice de la valeur maximale d'une liste
+
+    Args:
+        lst (list): la liste
+
+    Returns:
+        int: l'indice de la valeur max
+    """
+    max_val_index = 0
+    for i in range(1, len(lst)):
+        if lst[i] > lst[max_val_index]:
+            max_val = i
+    return max_val
+
+# MAIN
+def main():
+    tester()
 
 #--- EXECUTION ---# 
 if __name__ == "__main__":
