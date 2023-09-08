@@ -7,7 +7,6 @@ from Ex2 import est_bissextile
 
 def main():
     test_acces()
-    main()
 
 def saisir_entier(chose : str) -> int:
     """Vérifie que la saisie est un entier
@@ -75,6 +74,8 @@ def saisir_date_naissance() -> date:
     Returns:
         date: la date de naissance (jour, mois, année)
     """
+
+    print("Vous allez saisir votre date de naissance")
     #// DEBUT SAISIE
     jour = saisir_entier("le jour")
     mois = saisir_entier("le mois")
@@ -84,7 +85,27 @@ def saisir_date_naissance() -> date:
     return date(annee, mois, jour)
 
 def age(date_naissance : date) -> int:
-    print(date.today().day - date_naissance.day) 
+    date_today = date.today()
+
+    age = date_today.year - date_naissance.year
+
+    anniv_celebrated = False
+    if (date_today.month < date_naissance.month):
+        if (date_today.day < date_naissance.day):
+            anniv_celebrated = True 
+
+    if not anniv_celebrated:
+        age -= 1
+
+    print(age)
+
+    return age
+
+def est_majeur(date_naissance: date) -> bool:
+    majeur = True
+    if age(date_naissance) < 18:
+        majeur = False
+    return majeur
 
 def test_acces():
     """Assure la saisie de la date de naissance et 
@@ -93,7 +114,7 @@ def test_acces():
     """
     # saisir la date de naissance
     date_naissance = saisir_date_naissance()
-    age(date_naissance)
+    est_majeur(date_naissance)
 
 #--- EXECUTION ---# 
 if __name__ == "__main__":
