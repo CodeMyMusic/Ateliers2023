@@ -12,7 +12,9 @@ def sommme_boucle_for_index(lst : list) -> int:
         int: la somme
     """
     somme = 0
-    for i in range(len(lst)):
+    # pour éviter recalcul à chaque itération
+    len_list = len(lst)
+    for i in range(len_list):
         somme += lst[i]
     return somme
 
@@ -43,8 +45,10 @@ def somme_boucle_while(lst : list) -> bool:
         int: la somme
     """
     somme = 0
+    # pour éviter recalcul à chaque itération
+    len_list = len(lst)
     i = 0
-    while i < len(lst):
+    while i < len_list:
         somme += lst[i]
         i += 1
     return somme
