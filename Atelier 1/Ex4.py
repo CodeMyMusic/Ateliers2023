@@ -85,36 +85,88 @@ def saisir_date_naissance() -> date:
     return date(annee, mois, jour)
 
 def age(date_naissance : date) -> int:
+    """Renvoie l'âge à la date du jour d'après la date de 
+    naissance fournie
+
+    Args:
+        date_naissance (date): la date de naissance
+
+    Returns:
+        int: l'âge
+    """
+    # date du jour
     date_today = date.today()
 
+    # calcul de l'âge en année (en supposant que
+    # l'anniversaire est passé
     age = date_today.year - date_naissance.year
 
+    # on considère l'anniversaire non fêté
     anniv_celebrated = False
-    if (date_today.month < date_naissance.month):
-        if (date_today.day < date_naissance.day):
+    # d'abord on vérifie que le mois de cette année
+    # est après ou est le mois de la date de naissance
+    if (date_today.month >= date_naissance.month):
+        # et on vérifie avec les jours
+        if (date_today.day >= date_naissance.day):
             anniv_celebrated = True 
 
+    # donc si l'anniversaire n'a pas été fêté il faut
+    # retirer un an à la personne
     if not anniv_celebrated:
         age -= 1
-
-    print(age)
 
     return age
 
 def est_majeur(date_naissance: date) -> bool:
+    """Teste si la personne est majeure en fonction de
+    la date du jour et de la date naissance
+
+    Args:
+        date_naissance (date): la date de naissance
+
+    Returns:
+        bool: majeur ou pas
+    """
     majeur = True
     if age(date_naissance) < 18:
         majeur = False
     return majeur
 
 def test_acces():
-    """Assure la saisie de la date de naissance et 
+    """Fonction d'affichage
+    Assure la saisie de la date de naissance et 
     determine en fonction de l'age si l'acces est autorisé
 
     """
+    test()
     # saisir la date de naissance
     date_naissance = saisir_date_naissance()
-    est_majeur(date_naissance)
+    age = age(date_naissance)
+    if est_majeur(date_naissance):
+        print(f'Bonjour, vous avez {age} ans, Accès autorisé')
+    else:
+        print(f'Désolé, vous avez {age}, Accès interdit')
+
+              
+def test():
+    """Test des fonctions et procédures
+    """
+    dates_naissances = [
+        # random
+        date(1997, 5, 2),
+
+        # contexte !! nous sommes le 8 sept 2023
+
+        # meme jour et meme mois qu'hier
+        date(2005, 9, 7),
+        # meme jour et meme mois qu'aujourd'hui
+        date(2005, 9, 8),
+        # meme jour et meme mois que demain
+        date(2005, 9, 9)
+    ]
+    for date_naissance in dates_naissances:
+        print("{} : {}".format(age(date_naissance), est_majeur(date_naissance)))
+    
 
 #--- EXECUTION ---# 
 if __name__ == "__main__":
