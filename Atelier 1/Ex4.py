@@ -18,7 +18,7 @@ def saisir_entier(chose : str) -> int:
         int: le type de date converti en entier
     """
     saisieValide = False
-    while saisieValide == False:
+    while not saisieValide:
         # saisie
         entier = input(f'Entrez {chose} : ')
         try:

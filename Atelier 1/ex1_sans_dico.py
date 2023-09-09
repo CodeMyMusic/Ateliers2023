@@ -21,7 +21,7 @@ categories_imc = ['Dénutrition ou famine', 'Maigreur', 'Corpulence normale', 'S
 
 def main():
     saisieValide = False
-    while saisieValide == False:
+    while not saisieValide:
         imc = input("Entrez l'indice de masse corporelle (IMC): ")
         try:
             # on essaie de convertir l'input en nombre réel

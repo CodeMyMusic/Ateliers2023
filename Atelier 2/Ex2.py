@@ -1,6 +1,6 @@
 ### CONSTANTES ####
 
-liste_non_triee_sans_doublons = [5, 1, 12, 5, 2, 24, 18, 17, 3, 8, 87, 6, 278, 210]
+liste_non_triee_sans_doublons = [5, 1, 12, 2, 24, 18, 17, 3, 8, 87, 6, 278, 210]
 liste_non_triee_doublons = [2, 1, 24, 1, 0, 25, 24, 12, 3, 1]
 liste_non_triee = [1, 2, 3, 2, 1]
 liste_triee = [2, 4, 6, 8, 9, 10, 11, 15, 34, 35, 70, 73, 78, 79, 81, 90]
@@ -49,7 +49,7 @@ def position_tri(lst : list, e : int) -> int:
     elif lst[len_moitie_lst] < e:
         # on veut tester de la moitie à la fin de la liste
         lst = lst[len_moitie_lst:]
-        
+
         # e est dans la seconde partie du tableau
         # donc on rajoute l'indice de la moitié du tableau actuel à l'index de
         # la seconde moitié renvoyé par la fonction position_tri
@@ -154,7 +154,7 @@ def est_triee_while(lst : list) -> bool:
     return trie
 
 
-def a_repetitions(list : list) -> bool:
+def a_repetitions(lst : list) -> bool:
     """Détermine si une liste comporte des répétitions de valeurs
 
     Args:
@@ -163,6 +163,17 @@ def a_repetitions(list : list) -> bool:
     Returns:
         bool: la liste comporte des répétitions
     """
+    t_list = []
+    repetition = False
+    i = 0
+    list_len = len(lst)
+    while not repetition and i < list_len:
+        if lst[i] not in t_list:
+            t_list.append(lst[i])
+            i += 1
+        else:
+            repetition = True
+    return repetition
     
 def tester():
     """Fonction de test
@@ -191,6 +202,8 @@ def tester():
     print("test liste position indice supposee triee (e : 15) : ", position_tri(sorted(liste_non_triee_sans_doublons), 278))
 
     # TEST REPETITIONS
+    print("test liste avec doublons repetition: ", a_repetitions(liste_non_triee_doublons))
+    print("test liste sans doublons repetition: ", a_repetitions(liste_non_triee_sans_doublons))
 
 
 # MAIN

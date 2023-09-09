@@ -1,6 +1,6 @@
 def main():
     saisieValide = False
-    while saisieValide == False:
+    while not saisieValide:
         annee = input("Entrez une année pour savoir si elle est bissextile :")
         try:
             # on essaie de convertir l'input en nombre réel

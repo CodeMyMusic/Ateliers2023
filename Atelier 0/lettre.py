@@ -41,7 +41,7 @@ def main():
     
     # INPUT TYPE
     saisieValide = False
-    while saisieValide == False:
+    while not saisieValide:
         type_lettre = input("Entrez le type de la lettre {} :".format(types_input))
         if type_lettre in types_input:
             saisieValide = True
@@ -50,7 +50,7 @@ def main():
 
     # INPUT POIDS
     saisieValide = False
-    while saisieValide == False:
+    while not saisieValide:
         liste_poids = list(possible_types[type_lettre].keys())
         poids = input("Entrez le poids de la lettre (max {} grammes) : ".format(liste_poids[len(liste_poids)-1]))
         try:
@@ -88,7 +88,7 @@ def trouver_montant_lettre(poids: int, type_lettre: str) -> int:
     # index dans le dico
     i = 0
     # tant qu'on a pas trouvé le prix et qu'on a pas dépassé la longeur du dico
-    while trouvePrix == False and i < len(dico_poids_prix):
+    while not trouvePrix and i < len(dico_poids_prix):
         # la clé c'est le poids
         tranche_poids = list(dico_poids_prix.keys())[i]
         if poids <= tranche_poids:

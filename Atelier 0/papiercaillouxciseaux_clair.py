@@ -12,7 +12,7 @@ define_winner = {
 }
 
 saisieValide = False
-while saisieValide == False:
+while not saisieValide:
     jouer_contre_ordinateur = input(
     "Voulez-vous jouer contre l'ordinateur (Max 5 parties) O/N ? ").lower()
     if jouer_contre_ordinateur == 'o' and jouer_contre_ordinateur == 'n':
@@ -33,7 +33,7 @@ else:
     print("Bienvenue à vous deux, que le meilleur gagne")
 
 saisieValide = False
-while saisieValide == False:
+while not saisieValide:
     puit_is_allowed = input("Voulez-vous autoriser le puit ? (O/N) ").lower()
     if puit_is_allowed == 'o' and puit_is_allowed == 'n':
         saisieValide = True
@@ -62,7 +62,7 @@ def get_choix(joueur:str) -> str:
     """
     saisieValide = False
 
-    while saisieValide == False:
+    while not saisieValide:
         saisieValide = input("{}, faîtes votre choix parmi {}: ".format(joueur, game_responses)
                 ).lower()
         if saisieValide in game_responses:
@@ -94,7 +94,7 @@ def teste_gagne(choix1: str, choix2: str) -> bool:
     return est_gagnant
 
 
-while exit_game == False:
+while not exit_game:
     # On incrémente le nombre de parties
     nbr_parties += 1
 
@@ -139,7 +139,7 @@ while exit_game == False:
     else:
         exit_game = True
 
-    if nbr_parties< 5:
+    if nbr_parties < 5:
         # On propose au joueur(s) de rejouer
         continuer= input(
             "Souhaitez vous refaire une partie {} contre {} ? (O/N) ".format(joueur1, joueur2))

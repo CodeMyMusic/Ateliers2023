@@ -21,7 +21,7 @@ INTERPRETATION_IMC_DIC = {
 
 def main():
     saisieValide = False
-    while saisieValide == False:
+    while not saisieValide:
         imc = input("Entrez l'indice de masse corporelle (IMC): ")
         try:
             # on essaie de convertir l'input en nombre réel
@@ -77,7 +77,7 @@ def interpretation_imc(imc : int) -> str:
         i = 0
         # tant qu'on a pas trouve la description et qu'on a pas dépassé
         # la taille de la liste
-        while trouveDescription == False and i < len(tranche_imc):
+        while not trouveDescription and i < len(tranche_imc):
             # la première valeur dans la liste [16.5, 18.5] est le seuil min
             seuil_min = tranche_imc[i][0]
             # la seconde valeur dans la liste [16.5, 18.5] est le seuil max

@@ -20,7 +20,7 @@ def gerer_saisie_nbr_reel(nom_nbr: str, is_not_zero = False) -> float:
     """
     nbr = 0
     saisieValide = False
-    while saisieValide == False:
+    while not saisieValide:
         nbr = input(f'Entrez {nom_nbr} :')
         try:
             # on essaie de convertir l'input en nombre réel
