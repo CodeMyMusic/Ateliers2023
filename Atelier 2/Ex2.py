@@ -1,9 +1,9 @@
 ### CONSTANTES ####
 
-liste_non_triee_sans_doublons = [5, 1, 12, 5, 2, 24, 18, 17]
+liste_non_triee_sans_doublons = [5, 1, 12, 5, 2, 24, 18, 17, 3, 8, 87, 6, 278, 210]
 liste_non_triee_doublons = [2, 1, 24, 1, 0, 25, 24, 12, 3, 1]
 liste_non_triee = [1, 2, 3, 2, 1]
-liste_triee = [2, 4, 6, 8, 9, 10, 11, 15, 34, 35, 70, 73, 78, 79, 81, 90, 100]
+liste_triee = [2, 4, 6, 8, 9, 10, 11, 15, 34, 35, 70, 73, 78, 79, 81, 90]
 liste_triee_doublons = [2, 2, 3, 3, 4, 5, 10]
 
 #### ////// #####
@@ -42,7 +42,6 @@ def position_tri(lst : list, e : int) -> int:
     index = -1
     # on rend la taille de la liste divisible (paire)
     len_lst_pair = len(lst) - (len(lst) % 2)
-    print(len(lst), (len(lst) % 2), len_lst_pair)
     len_moitie_lst = int(len_lst_pair / 2)
     if lst[len_moitie_lst] == e:
         index = len_moitie_lst
@@ -50,13 +49,18 @@ def position_tri(lst : list, e : int) -> int:
     elif lst[len_moitie_lst] < e:
         # on veut tester de la moitie à la fin de la liste
         lst = lst[len_moitie_lst:]
-        print("a ", lst)
+        
+        # e est dans la seconde partie du tableau
+        # donc on rajoute l'indice de la moitié du tableau actuel à l'index de
+        # la seconde moitié renvoyé par la fonction position_tri
         index = len_moitie_lst + position_tri(lst, e)
     else:
         # on veut tester du debut à la moitie de la liste
         lst = lst[0:len_moitie_lst]
-        print("b ",lst)
-        index = len_moitie_lst + position_tri(lst, e)
+        
+        # e est dans la première moitié, on a juste à chercher
+        # son index dans la première moitié
+        index = position_tri(lst, e)
 
     return index
 
@@ -182,7 +186,11 @@ def tester():
     print("test liste non triee boucle while : ", est_triee_while(liste_non_triee))
 
     # TEST INDICE LISTE SUPPOSEE TRIEE
-    print("test liste position indice supposee triee (e : 70) : ", position_tri(liste_triee, 70))
+    print("test liste position indice supposee triee (e : 15) : ", position_tri(liste_triee, 15))
+    print("test liste position indice supposee triee (e : 15) : ", position_tri(liste_triee, 90))
+    print("test liste position indice supposee triee (e : 15) : ", position_tri(sorted(liste_non_triee_sans_doublons), 278))
+
+    # TEST REPETITIONS
 
 
 # MAIN
