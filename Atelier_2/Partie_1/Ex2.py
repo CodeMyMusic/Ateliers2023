@@ -88,7 +88,7 @@ def position_while(lst : list, e : int) -> int:
             i += 1
     return index
 
-def nb_occurences(lst : list, e : int) -> int:
+def nb_occurrences(lst : list, e : int) -> int:
     """Retourne le nombre d'occurences de l'entier e dans la liste lst
 
     Args:
@@ -185,7 +185,7 @@ def tester():
     print("indice boucle while : ", indice_boucle_while)
 
     # TEST OCCURENCE
-    print("nb occ :", nb_occurences(liste_non_triee_doublons, 1))
+    print("nb occ :", nb_occurrences(liste_non_triee_doublons, 1))
 
     # TEST TRI
     print("TEST POUR SAVOIR SI LISTE TRIEE PAR ORDRE CROISSANT")

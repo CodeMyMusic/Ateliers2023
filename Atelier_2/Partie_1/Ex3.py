@@ -33,7 +33,13 @@ def separer(lst : list) -> list:
     
     return new_list
 
-res = separer(liste_non_triee_relative)
+# MAIN
+def main():
+    res = separer(liste_non_triee_relative)
 
-# j'ai trouvé du premier coup !
-print(res)
+    # j'ai trouvé du premier coup !
+    print(res)
+
+#--- EXECUTION ---# 
+if __name__ == "__main__":
+    main()
