@@ -30,10 +30,8 @@ def histo(F : list) -> list:
     # calcul de la valeur max
     max_val = val_max(F) + 1
     H = [0] * max_val
-    len_F = len(F)
-    for i in range(len_F):
-        value = F[i]
-        H[value] += 1
+    for elmt in F:
+        H[elmt] += 1
     return H
 
 def est_injective(F :list) -> bool:
