@@ -1,16 +1,20 @@
+import matplotlib.pyplot as plt
+
 import sys
 
 # adding Folder_2 to the system path
 sys.path.insert(0, "C:/Users/aurel/Desktop/ATELIERS_2023/Atelier_2")
 
-from Partie_1.Ex2 import nb_occurrences 
 from Partie_1.Ex1 import val_max
+
+
 
 # CONSTANTES
 F1 = [6,5,6,7,4,2,1,5]
 F2 = [3,0,6,7,4,2,1,5]
 F3 = [1, 0, 2, 3, 4, 5, 6, 0]
-F4 = [0, 0, 2, 3, 1, 4, 4, 8, 8, 10, 1, 2, 3, 7, 7, 9, 11, 13]
+F4 = [2, 3, 1, 4, 4, 8, 8, 10, 1, 2, 3, 7, 7, 9, 11, 13]
+F5 = [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 2]
 
 def histo(F : list) -> list:
     """Renvoie à partir d'une liste d'entiers F
@@ -26,8 +30,10 @@ def histo(F : list) -> list:
     # calcul de la valeur max
     max_val = val_max(F) + 1
     H = [0] * max_val
-    for i in range(max_val):
-        H[i] = nb_occurrences(F, i)
+    len_F = len(F)
+    for i in range(len_F):
+        value = F[i]
+        H[value] += 1
     return H
 
 def est_injective(F :list) -> bool:
@@ -131,9 +137,34 @@ def afficher_histo(F : list):
         else:
             print(" ", c, "", end='')
 
+def afficher_histo_lib(F : list):
+    """Affiche l'histogramme à partir d'une liste
+    grâce à la librairie MatplotLib.pyplot
+
+    Args:
+        F (list): la liste d'entiers
+    """
+    print("TEST HISTOGRAMME")
+    print("F=", F)
+    print("HISTOGRAMME")
+    
+    # pour l'axe des abscisses on sait que cela va jusqu'à la maleur max de F
+    num_bins = max(F)
+
+    fig, ax = plt.subplots(figsize =(10, 7))
+
+    ax.hist(F, bins=num_bins, rwidth=0.8)
+
+    # pour ne pas dépasser la taille du tableau F dans l'axe des ordonnées
+    plt.yticks(range(0, len(F)))
+
+    plt.show()
+
+
 
 # MAIN
 def main():
+    print("histo de ", F4, " : ", histo(F4))
     print("est injective : ", F1, " ", est_injective(F1))
     print("est injective : ", F2, " ", est_injective(F2))
     print("est injective : ", F3, " ", est_injective(F3))
@@ -145,6 +176,9 @@ def main():
     print("est surjective : ", F3, " ", est_surjective(F3))
 
     afficher_histo(F4)
+    afficher_histo_lib(F4)
+
+    # afficher_histo_lib(F5)
 
 #--- EXECUTION ---# 
 if __name__ == "__main__":
