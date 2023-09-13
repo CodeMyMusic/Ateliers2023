@@ -30,7 +30,7 @@ def agencer_test(lstObjets: list):
     return vitrines
 
 
-def agencer(nbEmplacements: int, lstObjets: list) -> tuple:
+def agencer_2_vitrines(nbEmplacements: int, lstObjets: list) -> tuple:
     """Agence des objets dans deux vitrines. Retourne
     -1 si aucune solution n'est possible
 
@@ -88,7 +88,7 @@ def main():
     print(agencer_test([1, 2, 2, 3, 4, 5, 5]))
 
     # fonction intransigeante
-    print(agencer(8, [1, 2, 3, 4, 5, 6, 300, 300, 200, 201, 202, 200]))
+    print(agencer_2_vitrines(8, [1, 2, 3, 4, 5, 6, 300, 300, 200, 201, 202, 200]))
 
 
 # --- EXECUTION ---#

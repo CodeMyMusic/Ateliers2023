@@ -1,3 +1,4 @@
+from Partie_1.Ex1 import val_max
 import matplotlib.pyplot as plt
 
 import sys
@@ -5,18 +6,16 @@ import sys
 # adding Folder_2 to the system path
 sys.path.insert(0, "C:/Users/aurel/Desktop/ATELIERS_2023/Atelier_2")
 
-from Partie_1.Ex1 import val_max
-
-
 
 # CONSTANTES
-F1 = [6,5,6,7,4,2,1,5]
-F2 = [3,0,6,7,4,2,1,5]
+F1 = [6, 5, 6, 7, 4, 2, 1, 5]
+F2 = [3, 0, 6, 7, 4, 2, 1, 5]
 F3 = [1, 0, 2, 3, 4, 5, 6, 0]
 F4 = [2, 3, 1, 4, 4, 8, 8, 10, 1, 2, 3, 7, 7, 9, 11, 13]
 F5 = [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 2]
 
-def histo(F : list) -> list:
+
+def histo(F: list) -> list:
     """Renvoie à partir d'une liste d'entiers F
     une liste d'entiers H représentant l'histogramme
     de F
@@ -27,15 +26,19 @@ def histo(F : list) -> list:
     Returns:
         list: la liste d'entiers H
     """
-    # calcul de la valeur max
+    # calcul de la valeur max (+1 pour compter le 0)
     max_val = val_max(F) + 1
     H = [0] * max_val
+
+    # Parcourir la liste F et incrémenter les cases correspondantes de la liste H
     for elmt in F:
         H[elmt] += 1
     return H
 
-def est_injective(F :list) -> bool:
-    """Cette fonction renvoie la valeur True si la fonction représentée par la liste F est une injection.
+
+def est_injective(F: list) -> bool:
+    """Cette fonction renvoie la valeur True si la fonction 
+    représentée par la liste F est une injection.
 Dans le cas contraire, elle renvoie False.
 
 
@@ -56,7 +59,8 @@ Dans le cas contraire, elle renvoie False.
             i += 1
     return injective
 
-def est_surjective(F :list) -> bool:
+
+def est_surjective(F: list) -> bool:
     """Cette fonction renvoie la valeur True si 
     la fonction représentée par la liste F 
     est une surjection.
@@ -80,7 +84,8 @@ Dans le cas contraire, elle renvoie False.
             i += 1
     return surjective
 
-def est_bijective(F :list) -> bool:
+
+def est_bijective(F: list) -> bool:
     """Cette fonction renvoie la valeur True si 
     la fonction représentée par la liste F 
     est une bijection.
@@ -104,7 +109,8 @@ Dans le cas contraire, elle renvoie False.
             i += 1
     return bijective
 
-def afficher_histo(F : list):
+
+def afficher_histo(F: list):
     """Affiche l'histogramme à partir d'une liste
 
     Args:
@@ -135,21 +141,19 @@ def afficher_histo(F : list):
         else:
             print(" ", c, "", end='')
 
-def afficher_histo_lib(F : list):
+
+def afficher_histo_lib(F: list):
     """Affiche l'histogramme à partir d'une liste
     grâce à la librairie MatplotLib.pyplot
 
     Args:
         F (list): la liste d'entiers
     """
-    print("TEST HISTOGRAMME")
-    print("F=", F)
-    print("HISTOGRAMME")
-    
+
     # pour l'axe des abscisses on sait que cela va jusqu'à la maleur max de F
     num_bins = max(F)
 
-    fig, ax = plt.subplots(figsize =(10, 7))
+    fig, ax = plt.subplots(figsize=(10, 7))
 
     ax.hist(F, bins=num_bins, rwidth=0.8)
 
@@ -157,7 +161,6 @@ def afficher_histo_lib(F : list):
     plt.yticks(range(0, len(F)))
 
     plt.show()
-
 
 
 # MAIN
@@ -178,6 +181,7 @@ def main():
 
     # afficher_histo_lib(F5)
 
-#--- EXECUTION ---# 
+
+# --- EXECUTION ---#
 if __name__ == "__main__":
     main()

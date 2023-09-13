@@ -158,10 +158,14 @@ def val_max(lst : list) -> int:
     Returns:
         int: la valeur max
     """
-    max_val = lst[0]
-    for i in range(1, len(lst)):
-        if lst[i] > max_val:
-            max_val = lst[i]
+    len_lst = len(lst)
+    if len_lst == 0:
+        max_val = 0
+    else:
+        max_val = lst[0]
+        for i in range(1, len(lst)):
+            if lst[i] > max_val:
+                max_val = lst[i]
     return max_val
 
 def ind_max(lst : list) -> int:
