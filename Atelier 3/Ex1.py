@@ -14,6 +14,7 @@ def full_name(str_arg: str) -> str:
 
     return ' '.join([nom, prenom])
 
+# CODE PLUS PERFORMANT
 def full_name_without_functions(str_arg: str) -> str:
     """Renvoie le nom prénom formaté
 
@@ -23,40 +24,49 @@ def full_name_without_functions(str_arg: str) -> str:
     Returns:
         str: nom prenom formaté
     """
+    # Tant qu'on ne trouve pas le nom
     nomTrouve = False
+    # pour que la première du prénom soit
+    # convertie en majuscule
     premiereLettrePrenom = True
 
     # résultat final
-    str_res = ''
+    full_name = ''
 
-    for c in str_arg:
-        # délimiteur nom / prénom
-        if c == ' ':
-            str_res += ' '
+    # on parcoure le nom prénom non formaté
+    for char in str_arg:
+        # s'il y a un espace
+        if char == ' ':
+            full_name += ' '
+            # le nom est trouvé
             nomTrouve = True
         else:
+            # si le nom n'est pas trouvé
             if not nomTrouve:
-                str_res += majuscule(c)
+                # on convertir en majuscule
+                full_name += to_majuscule(char)
             else:
+                # s'éxécute une seule fois pour mettre la
+                # première lettre en majuscule
                 if premiereLettrePrenom:
-                    str_res += majuscule(c)
+                    full_name += to_majuscule(char)
                     premiereLettrePrenom = False
                 else:
                     # si c'est une minuscule
-                    if 97 <= ord(c) <= 122:
-                        str_res += c
+                    if 97 <= ord(char) <= 122:
+                        # on ajoute juste
+                        full_name += char
                     else:
-                        # conversion en minuscule
-                        str_res += chr(ord(c) + 32)
+                        # on convertit en minuscule et on ajoute
+                        full_name += chr(ord(char) + 32)
 
-    return str_res
+    return full_name
 
-def majuscule(c : chr)-> chr:
-    # si ce n'est pas une majuscule
+def to_majuscule(c : chr)-> chr:
+    # on vérifie si ce n'est pas une majuscule
     if ord(c) < 65 or ord(c) > 90:
         # on convertit en majuscule
         c = chr(ord(c) - 32)
     return c
-    
 
 print(full_name_without_functions("véron aUrÈlE"))
