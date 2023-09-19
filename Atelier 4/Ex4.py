@@ -1,6 +1,15 @@
 from random import *
 
 def extract_elmts_list(lst: list, nbr : int) -> list:
+    """Extrait un certain nombre d'éléments d'une liste
+
+    Args:
+        lst (list): la liste
+        nbr (int): le nombre d'elmts à extraire
+
+    Returns:
+        list: la liste d'éléments extraits
+    """
     lst_index_elmts = []
     i = 0
     while i < nbr:
