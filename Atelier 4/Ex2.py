@@ -1,5 +1,6 @@
 from random import *
 
+# après la revue de code, j'en conclus que cet algo est mauvais
 def mix_list(list_to_mix : list)->list:
     """Mélange une liste potentiellement triée
     et retourne la liste mélangée
