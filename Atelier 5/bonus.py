@@ -22,7 +22,7 @@ def findMin(lst : list)-> int:
         minVal = math.inf
     return minVal
 
-print(findMin([115155, 500000, 100000, 51888, 51889]))
+# print(findMin([115155, 500000, 100000, 51888, 51889]))
 
 def listPairs(lst: list)-> list:
     if lst:
@@ -39,4 +39,17 @@ def listPairs(lst: list)-> list:
         
     return pair_list
 
-print(listPairs([0, 1, 2, 3, 4, 5, 6, 7, 8]))
+# print(listPairs([0, 1, 2, 3, 4, 5, 6, 7, 8]))
+
+def concat_list(lst: list)-> list:
+    if lst:
+        deb = lst.pop(-1)
+        lst_deconcated = concat_list(lst)
+        for elmt in deb:
+            lst_deconcated.append(elmt)
+    else:
+        lst_deconcated = []
+        
+    return lst_deconcated
+
+print(concat_list([[0, 1], [2, 3], [4], [6, 7]]))
