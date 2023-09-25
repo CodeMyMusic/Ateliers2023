@@ -41,15 +41,44 @@ def listPairs(lst: list)-> list:
 
 # print(listPairs([0, 1, 2, 3, 4, 5, 6, 7, 8]))
 
-def concat_list(lst: list)-> list:
-    if lst:
-        deb = lst.pop(-1)
-        lst_deconcated = concat_list(lst)
-        for elmt in deb:
-            lst_deconcated.append(elmt)
+def concat_list_corr(lst: list)-> list:
+    if not list:
+        return []
     else:
-        lst_deconcated = []
-        
-    return lst_deconcated
+        return lst[0] + concat_list_corr(lst[1:])
+    
 
-print(concat_list([[0, 1], [2, 3], [4], [6, 7]]))
+def concat_list_corr2(lst: list, res=[])-> list:
+    if not list:
+        return res
+    else:
+        res += lst[0]
+    return concat_list_corr2(lst, res)
+
+print(concat_list_corr([[0, 1], [2, 3], [4], [6, 7]]))
+
+# séparer une liste en deux (une paire une impaire)
+def separe(lst: list)-> (list, list):
+    if lst == []:
+        return ([], [])
+    else:
+        pile = separe(lst[1:])
+        if lst[0]%2 == 0:
+            pile[1].append(lst[0])
+        else:
+            pile[0].append(lst[1])
+        return pile
+
+# def incluse(lst_1 : list, lst_2: list)-> bool:
+#     """Vérifie que les éléments de la première liste
+#     sont tous présents dans la deuxième
+
+#     Args:
+#         lst_1 (list): _description_
+#         lst_2 (list): _description_
+
+#     Returns:
+#         bool: _description_
+#     """
+#     incluse = True
+#     if (lst_1[0] == lst_2[0]):
