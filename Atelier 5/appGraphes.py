@@ -41,10 +41,13 @@ def matriceAdjacencePond(S: list, A: (float, float, float))-> object:
     return matrice_adj
 
 # TESTS
-mat_adj = matriceAdjacences([0, 1, 2, 3, 4], [(0,1), (0, 2), (1,2), (1, 4), (2, 3), (3, 4), (4, 2)])
-print(mat_adj)
-mat_adj_pond = matriceAdjacencePond([0, 1, 2, 3, 4], [(0,1, 15), (0, 2, 10), (1,2, 4), (1, 4, 8), (2, 3, 23), (3, 4, 12), (4, 2, 11)])
-print(mat_adj_pond)
+mes_chemins = [(0,1), (0, 2), (1,2), (1, 4), (2, 3), (3, 4), (4, 2)]
+mes_sommets = [0, 1, 2, 3, 4]
+mat_adj = matriceAdjacences(mes_sommets, mes_chemins)
+print("matrice adjacence: \n",mat_adj)
+mes_chemins_ponderes = [(0,1, 12), (0, 2, 14), (1,2, 8), (1, 4, 3), (2, 3, 21), (3, 4, 18), (4, 2, 19)]
+mat_adj_pond = matriceAdjacencePond(mes_sommets, mes_chemins_ponderes)
+print("matrice adjacence pondérée: \n",mat_adj_pond)
 
 def lireMatriceFichier(nomFichier: str)->object:
     """Renvoie une matrice carrée contenue dans le fichier
@@ -90,8 +93,8 @@ def matriceIncidence(mat : object)->object:
     Returns:
         object: la matrice d'incidence
     """
-    nb_sommets = tousLesSommets(nb_sommets)
-    nb_chemins = listArcs(mat)
+    nb_sommets = len(tousLesSommets(mat))
+    nb_chemins = len(listArcs(mat))
 
     matrice_incidence = np.zeros([nb_sommets, nb_chemins])
 
@@ -106,9 +109,10 @@ def matriceIncidence(mat : object)->object:
 
     return matrice_incidence
 
-print(tousLesSommets(mat_adj))
-print(listArcs(mat_adj))
+print("matrice incidence: \n", matriceIncidence(mat_adj))
 
-print("matrice incidence:", matriceIncidence(mat_adj))
+def est_voisin(mat_adj, sommet_S, sommet_V)-> bool:
+    return mat_adj[sommet_S][sommet_V] == 1
 
-def est_voisin(mat_adj, sommet_S, sommet_V)
+print("(0,3): ", est_voisin(mat_adj, 0, 3))
+print("(0,2): ", est_voisin(mat_adj, 0, 2))
