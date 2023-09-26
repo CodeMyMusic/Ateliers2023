@@ -34,6 +34,11 @@ def outputStr(mot: str, lpos: list)-> str:
     return masked_word
 
 def affiche_pendu(nbErreurs):
+    """Affiche le pendu selon le nombre d'erreurs
+
+    Args:
+        nbErreurs (_type_): le nombre d'erreurs
+    """
     visuel_pendu = [
         "|---] ",
         "| 0 ",
@@ -44,6 +49,7 @@ def affiche_pendu(nbErreurs):
     for i in range(nbErreurs):
         print(visuel_pendu[i])
 
+# JEU
 def runGame():
     liste_mots = ["pastèque", "personne", "environnement", "pélican", "cuistre"]
 
