@@ -1,17 +1,21 @@
 import numpy as np
 from random import *
 
-# liste en compréhension !LEVEL UP!
 # matrice de 4x4 valeurs aléatoires en 0 et 10
 A = np.array([[ randint(0, 9) for _ in range(4)] for _ in range(4)])
 
-print(A)
+print("A:", A)
 
-# raccourci de ouf
+# matrice de 4x4 valeurs aléatoires en 0 et 10
+A = np.random.randint(0, 9, (4, 4))
+print("A (built-in):", A)
+
 # matrice identité de dimension 4x4
-B = np.array([[1]*4]*4)
+B = np.zeros([4, 4], int)
+# diagonale principale on met que des 1
+np.fill_diagonal(B, 1)
+print("B:", B)
 
-print(B)
 
 def matrice_trace(matrice : object)-> int:
     """Prend en entrée une matrice carrée et
@@ -79,6 +83,6 @@ print("produit diagonal matrice identité:", produit_diagonal(B))
 print(np.transpose(A)*A)
 
 if produit_diagonal(A) != 0:
-    print("matrice proche matrice i ?",np.linalg.inv(A)*A)
+    print("matrice proche matrice i ?",np.dot(np.linalg.inv(A), A))
 else:
     print("matrice a non inversible")
