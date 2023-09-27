@@ -69,16 +69,15 @@ def tousLesSommets(mat: object)->list:
         list: la liste de tous les sommets
     """
     lst_sommets = []
-    len_mat = len(mat)
-    for i in range(len_mat):
+    for i in range(len(mat)):
         lst_sommets.append(i)
     return lst_sommets
 
 def listArcs(mat : object)-> [(float, float)]:
     lst_arcs = []
-    len_mat_carre = len(mat)
-    for i in range(len_mat_carre):
-        for j in range(len_mat_carre):
+    # comme la matrice d'adjacence se lit NBSOMMETS * NBSOMMETS
+    for i in range(len(mat)):
+        for j in range(len(mat)):
             if mat[i][j]==1:
                 lst_arcs.append((i, j))
     return lst_arcs
@@ -100,10 +99,15 @@ def matriceIncidence(mat : object)->object:
 
     nb_chem = 0
 
+    # la matrice d'adjacence se lit NBSOMMETS * NBSOMMETS
+    # i représente donc un SOMMET (LIGNES dans la matrice d'adjcence)
+    # j représente donc un SOMMET (COLONNES dans la matrice d'ajdacence)
     for i in range(nb_sommets):
         for j in range(nb_sommets):
             if mat[i, j] == 1:
+                # le sommet i est associé au chemin sortant nb_chem
                 matrice_incidence[i][nb_chem] = -1
+                # le sommet j est associé au chemin entrant nb_chem
                 matrice_incidence[j][nb_chem] = 1
                 nb_chem += 1               
 

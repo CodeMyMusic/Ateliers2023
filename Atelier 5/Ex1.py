@@ -44,8 +44,7 @@ def my_where(table: object, elmt = int) -> list:
         int: l'indice de l'elmt
     """
     lst_index_elmt = []
-    len_table = len(table)
-    for i in range(len_table):
+    for i in range(len(table)):
         e = table[i]
         if e == elmt:
             lst_index_elmt.append(i)

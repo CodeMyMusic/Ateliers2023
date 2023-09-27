@@ -31,9 +31,8 @@ def my_add(tabA: object, tabB: object)-> object:
                 if len(tabA[nb_lst]) != len(tabB[nb_lst]):
                     valide = False
                 else:
-                    len_lists = len(list_in_tab_a)
                     addition_listes = []
-                    for i in range(len_lists):
+                    for i in range(len(list_in_tab_a)):
                         addition_listes.append(list_in_tab_a[i] + list_in_tab_b[i])
                     addition_matrices.append(addition_listes)
                     nb_lst += 1

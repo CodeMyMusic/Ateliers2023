@@ -29,8 +29,7 @@ def matrice_trace(matrice : object)-> int:
         de la matrice
     """
     trace = 0
-    len_matrice = len(matrice)
-    for i in range(len_matrice):
+    for i in range(len(matrice)):
         trace += matrice[i][i]
     return trace
 
@@ -70,8 +69,7 @@ def produit_diagonal(matrice : object)-> float:
         float: le produit des elmts de la diago principale
     """
     produit = 1
-    len_matrice = len(matrice)
-    for i in range(len_matrice):
+    for i in range(len(matrice)):
         produit *= matrice[i][i]
     return produit
 
