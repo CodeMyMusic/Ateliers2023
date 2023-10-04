@@ -31,8 +31,8 @@ public class Entier {
 	}
 	
 	public void increment(int n) {
-		for (int i = 0; i < n; i++) {
-			increment();
+		if (valeur + n < borneMax - 1) {
+			valeur += n;
 		}
 	}
 

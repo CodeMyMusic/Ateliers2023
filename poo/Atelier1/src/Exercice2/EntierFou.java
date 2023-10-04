@@ -20,9 +20,7 @@ public class EntierFou extends Entier {
 	@Override
 	public void increment() {
 		int n = r.nextInt(niveauDeFolie) + 1;
-		for (int i = 0; i < n; i++) {
-			super.increment();
-		}
+		super.increment(n);
 	}
 	
 

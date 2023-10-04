@@ -1,5 +1,4 @@
 package exercice3;
-import java.math.*;
 import java.lang.String;
 
 public class TestAPI {

@@ -67,11 +67,11 @@ public class Dice {
 	        + nbFaces + ". Ce nombre doit etre compris entre 3 et 120" + 
 	        		" exclus. Nombre de faces" + " affecte a defaut (6).");
 
-			this.nbFaces = 6;
+			this.nbFaces = nbFacesDefaut;
 		}
 	}
 	
-	public void testNbFaces(int nbFaces) {
+	protected void testNbFaces(int nbFaces) {
 		if (nbFaces >= minFaces && nbFaces <= maxFaces) {
 			this.nbFaces = nbFaces;
 		}else {
@@ -90,7 +90,6 @@ public class Dice {
 			this.name = name;
 		}
 	}
-	
 	
 	////
 	
