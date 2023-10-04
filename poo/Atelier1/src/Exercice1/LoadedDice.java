@@ -1,7 +1,10 @@
 package Exercice1;
 
+import java.util.logging.*;
+
 public class LoadedDice extends Dice {
-	private final int borneMinimale;
+	final static protected int borneMinimaleDefaut = 4;
+	private int borneMinimale;
 	
 	public int getBorneMinimale() {
 		return borneMinimale;
@@ -9,10 +12,22 @@ public class LoadedDice extends Dice {
 
 	public LoadedDice(String name, int nbFaces, int borneMinimale) {
 		super(name, nbFaces);
-		if (borneMinimale < 1) {
-			throw new IllegalArgumentException("La borne minimale ne peut etre nulle");
-		}else {
-			this.borneMinimale = borneMinimale;
+		try {
+			if (borneMinimale < 1 || borneMinimale > nbFaces) {
+				throw new IllegalArgumentException();
+			}else {
+				this.borneMinimale = borneMinimale;
+			}
+		}catch(IllegalArgumentException ex) {
+	        // Create a Logger
+	        Logger logger
+	            = Logger.getLogger(
+	                LoadedDice.class.getName());
+	  
+	        // Set Logger level()
+	        logger.setLevel(Level.WARNING);  
+	        logger.warning("Attention borne minimale invalide. Valeur par defaut affectee.");
+			this.borneMinimale = borneMinimaleDefaut;
 		}
 	}
 	
@@ -22,7 +37,16 @@ public class LoadedDice extends Dice {
 	}
 	
 	@Override
-	public int lancer() {
-		return super.lancer() + borneMinimale;
+	public int lancer() {		
+		// on va passer par la boucle while de toute façon
+		int rollScore = 0;
+		boolean valeurMinimale = false;
+		while (!valeurMinimale) {
+			rollScore = super.lancer();
+			if (rollScore >= borneMinimale) {
+				valeurMinimale = true;
+			}
+		}
+		return rollScore;
 	}
 }

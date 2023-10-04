@@ -8,6 +8,8 @@ public class Dice {
 	final static protected int minFaces = 3;
 	final static protected int maxFaces = 120;
 	
+	final static protected int nbFacesDefaut = 6;
+	
 	private static int nbDices = 0;
 	
 	public static int getNbDices() {
@@ -32,11 +34,11 @@ public class Dice {
 	}
 	
 	public Dice(String name) {
-		this(name, 6);
+		this(name, nbFacesDefaut);
 	}
 	
 	public Dice() {
-		this(null, 6);
+		this(null, nbFacesDefaut);
 	}
 	
 	////
@@ -136,7 +138,6 @@ public class Dice {
                 equals = ((nbFaces == dice.nbFaces)&& (name.equals(dice.name)));
             }
         }
-         
         return equals;
 	}
 }

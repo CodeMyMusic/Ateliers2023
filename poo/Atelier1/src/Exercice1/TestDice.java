@@ -23,9 +23,25 @@ public class TestDice {
 		//l'erreur a été gérée si le nombre de faces passe à 6
 		System.out.println("nb faces passe a 6 pour nb faces non valide : " + diceNotValid);
 		
+		//DE PIPE
+		
 		LoadedDice depipe = new LoadedDice("Jacques", 15, 1);
 		System.out.println("de pipe description: " + depipe);
 		System.out.println("de pipe lance : " + depipe.lancer());
+		
+		depipe = new LoadedDice("Jean", 15, 14);
+		
+		System.out.println("de pipe v2, lance : " + depipe.lancer());
+		
+		LoadedDice depipe2 = new LoadedDice("Jean", 15, 16);
+		
+		System.out.println("de pipe non valide :" + depipe2);
+		
+		LoadedDice depipe3 = new LoadedDice("Joseph", 15, 0);
+		
+		System.out.println("de pipe non valide v2 :" + depipe3);
+		
+		/////
 		
 		MemoryDice deMemoire = new MemoryDice();
 		System.out.println("De memoire description :" + deMemoire);
